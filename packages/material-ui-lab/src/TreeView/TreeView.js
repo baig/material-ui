@@ -52,6 +52,7 @@ const TreeView = React.forwardRef(function TreeView(props, ref) {
     expanded: expandedProp,
     onNodeSelect,
     onNodeToggle,
+    rowRenderer,
     selected: selectedProp,
     ...other
   } = props;
@@ -541,6 +542,7 @@ const TreeView = React.forwardRef(function TreeView(props, ref) {
         mapFirstChar,
         addNodeToNodeMap,
         removeNodeFromNodeMap,
+        rowRenderer,
       }}
     >
       <ul
@@ -628,6 +630,13 @@ TreeView.propTypes = {
    * @param {array} nodeIds The ids of the expanded nodes.
    */
   onNodeToggle: PropTypes.func,
+  /**
+   * Renders the row
+   *
+   * @param {string} icon The id of the toggled node.
+   * @param {string} label The node status - If `true` the node was expanded. If `false` the node was collapsed.
+   */
+  rowRenderer: PropTypes.func.isRequired,
   /**
    * Selected node ids. (Controlled)
    * When `multiSelect` is true this takes an array of strings; when false (default) a string.

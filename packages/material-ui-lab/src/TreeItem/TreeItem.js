@@ -128,6 +128,7 @@ const TreeItem = React.forwardRef(function TreeItem(props, ref) {
     mapFirstChar,
     addNodeToNodeMap,
     removeNodeFromNodeMap,
+    rowRenderer,
   } = React.useContext(TreeViewContext);
 
   const nodeRef = React.useRef(null);
@@ -382,19 +383,7 @@ const TreeItem = React.forwardRef(function TreeItem(props, ref) {
       tabIndex={tabbable ? 0 : -1}
       {...other}
     >
-      <div
-        className={classes.content}
-        onClick={handleClick}
-        onMouseDown={handleMouseDown}
-        ref={contentRef}
-      >
-        <div onClick={onIconClick} className={classes.iconContainer}>
-          {icon}
-        </div>
-        <Typography onClick={onLabelClick} component="div" className={classes.label}>
-          {label}
-        </Typography>
-      </div>
+      {rowRenderer(icon, label)}
       {children && (
         <TransitionComponent
           unmountOnExit
