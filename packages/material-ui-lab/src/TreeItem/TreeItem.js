@@ -86,6 +86,7 @@ const TreeItem = React.forwardRef(function TreeItem(props, ref) {
     classes,
     className,
     collapseIcon,
+    component:Component = 'div',
     endIcon,
     expandIcon,
     icon: iconProp,
@@ -382,7 +383,7 @@ const TreeItem = React.forwardRef(function TreeItem(props, ref) {
       tabIndex={tabbable ? 0 : -1}
       {...other}
     >
-      <div
+      <Component
         className={classes.content}
         onClick={handleClick}
         onMouseDown={handleMouseDown}
@@ -394,7 +395,7 @@ const TreeItem = React.forwardRef(function TreeItem(props, ref) {
         <Typography onClick={onLabelClick} component="div" className={classes.label}>
           {label}
         </Typography>
-      </div>
+      </Component>
       {children && (
         <TransitionComponent
           unmountOnExit
@@ -433,6 +434,10 @@ TreeItem.propTypes = {
    * The icon used to collapse the node.
    */
   collapseIcon: PropTypes.node,
+  /**
+   * The component containing the list item.
+   */
+  component: PropTypes.elementType,
   /**
    * The icon displayed next to a end node.
    */
